@@ -1,0 +1,12 @@
+{application, erlport,
+ [
+  {description, ""},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { erlport_app, []}},
+  {env, []}
+ ]}.

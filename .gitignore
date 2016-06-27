@@ -1,0 +1,11 @@
+.rebar
+ebin
+deps
+.*.swp
+erl_crash.dump
+priv/log/
+log
+rel/tp_api
+dev
+.eunit
+.DS_Store
