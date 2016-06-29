@@ -123,12 +123,6 @@ generate_flight_number() ->
     Code ++ Num.
 
 create_plane(ControlTowerPid) ->
-    %% Instructions %%
-    %%  - Once the plane landed, we just allow it to terminate with a simple log message
-    %% ------------ %%
-    %%
-    %% Code to fill in %%
     FlightNumber = generate_flight_number(),
     #plane{flight_number=FlightNumber, control_tower_pid=ControlTowerPid}.
-    %% ------------ %%
 

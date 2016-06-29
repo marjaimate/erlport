@@ -14,7 +14,7 @@
 -export([init/1, handle_call/3, handle_cast/2, handle_info/2,
                   terminate/2, code_change/3]).
 % test
--export([test2/0]).
+-export([test_planes/0, test_tower_setup/0, test_single_plane/0, test_single_plane_landing/0]).
 
 -include_lib("include/airport.hrl").
 -define(PLANE_MODULE, plane).
@@ -22,9 +22,47 @@
 
 %% Test code
 %%
+%% Test if we can setup a tower instance, i.e. load up the server
+test_tower_setup() ->
+    {ok, CT} = control_tower:start_link(),
+    LS1 = control_tower:open_landing_strip(CT),
+    io:format("Control Tower: ~p | Landing Strip: ~p", [CT, LS1]),
+    timer:sleep(1000),
+    control_tower:close_airport(CT),
+    ok.
+
+%%
+%% Test if we can start up a tower and spawn a plane with it.
+%%
+test_single_plane() ->
+    {ok, CT} = control_tower:start_link(),
+    LS1 = control_tower:open_landing_strip(CT),
+    io:format("Control Tower: ~p | Landing Strip: ~p", [CT, LS1]),
+    Plane = get_plane(CT),
+    io:format("~n -- plane: ~p~n", [Plane]),
+    timer:sleep(1000),
+    control_tower:close_airport(CT),
+    ok.
+
+%%
+%% Test if we can start up a tower and spawn a plane with it as well as attempting to land it
+%%
+test_single_plane_landing() ->
+    {ok, CT} = control_tower:start_link(),
+    LS1 = control_tower:open_landing_strip(CT),
+    io:format("Control Tower: ~p | Landing Strip: ~p", [CT, LS1]),
+    Plane = get_plane(CT),
+    io:format("~n -- plane: ~p~n", [Plane]),
+    ?PLANE_MODULE:permission_to_land(Plane),
+    ?PLANE_MODULE:land(Plane),
+
+    timer:sleep(1000),
+    control_tower:close_airport(CT),
+    ok.
+
 %% This is where we spawn 10 planes, setup a control tower and then attempt to land them all
 %% ----------
-test2() ->
+test_planes() ->
     % Setup control tower
     {ok, CT} = control_tower:start_link(),
     LS1 = control_tower:open_landing_strip(CT),
