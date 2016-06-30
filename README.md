@@ -51,7 +51,7 @@ In our case, the *control tower* is a [gen_server](http://erlang.org/doc/man/gen
 *Planes* are instances of a [gen_fsm](http://erlang.org/doc/man/gen_fsm.html). This finite state machine has the following states:
 
 * **in_air** - The plane is airborne, waiting to land. Possible actions / transitions: *permission_to_land*
-* **prapre_for_landing** - Got permission to land and attempts landing to the given landing strip. Possible actions / transitions: *land*
+* **prepare_for_landing** - Got permission to land and attempts landing to the given landing strip. Possible actions / transitions: *land*
 * **landed** - Plane has touched ground and ready to finish its journey. Possible actions / transitions: *terminate*
 
 ## Tests
