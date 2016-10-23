@@ -61,8 +61,9 @@ in_air(permission_to_land, Plane) ->
             io:format("[PLANE] Can't land ~p~n", [Plane]),
             {next_state, in_air, Plane};
         LandingStrip ->
-            io:format("[PLANE] Got permission to land ~p~n", [Plane]),
-            {next_state, prepare_for_landing, Plane#plane{landing_strip=LandingStrip}}
+            Plane1 = Plane#plane{landing_strip=LandingStrip},
+            io:format("[PLANE] Got permission to land ~p~n", [Plane1]),
+            {next_state, prepare_for_landing, Plane1}
     end;
 
 % Redirect all unexpected calls to in_air events
@@ -88,7 +89,7 @@ prepare_for_landing(land, Plane) ->
 %%
 %% Code to fill in %%
 terminate(normal, landed, Plane=#plane{}) ->
-    io:format("[PLANE] ~p Finished up shift, chilling out in the hangar.", [Plane]),
+    io:format("[PLANE] ~p Finished up shift, chilling out in the hangar.~n", [Plane]),
     ok;
 
 terminate(_Reason, _StateName, _StateData) ->
