@@ -5,6 +5,10 @@ Before coming to the workshop, it would be advised to have Erlang installed. You
 
 * Install Erlang [version 18.3](http://www.erlang.org/download/otp_src_18.3.tar.gz) and activate it
 
+OR
+
+* Install the [latest version 19.1](http://www.erlang.org/downloads/19.1). The difference is with the finite state machine [gen_fsm](http://erlang.org/doc/man/gen_fsm.html) was moved to [gen_statem](http://erlang.org/doc/man/gen_statem.html). In this tutorial we'll be using *gen_fsm*.
+
 ## How to check I'm all setup?
 
 If you try to run the Erlang shell with simply `erl` should be enough. Alternatively, you can query the OTP version with:
