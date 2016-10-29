@@ -1,24 +1,18 @@
 Setup
 =====
 
-Before coming to the workshop, it would be advised to have Erlang installed. You can do it either [through installers](http://www.erlang.org/downloads) directly OR using Kerl:
+Before coming to the workshop, it would be advised to have Erlang installed. You can do it either [through installers](http://www.erlang.org/downloads):
 
-* Install [kerl](https://github.com/yrashk/kerl)
-* Setup your ~/.kerlrc with
-```bash
-$ export KERL_BASE_DIR="$HOME/.kerl"
-$ export KERL_DEFAULT_INSTALL_DIR="$KERL_BASE_DIR/installs"
-```
-* Install Erlang [version 18.0](http://www.erlang.org/download/otp_src_18.0.tar.gz) and activate it
-```bash
-$ kerl build 18.0 18.0
-$ kerl install 18.0
-$ . $KERL_DEFAULT_INSTALL_DIR/18.0/activate
-```
+* Install Erlang [version 18.3](http://www.erlang.org/download/otp_src_18.3.tar.gz) and activate it
 
 ## How to check I'm all setup?
 
-If you try to run the Erlang shell with simply `erl` should be enough.
+If you try to run the Erlang shell with simply `erl` should be enough. Alternatively, you can query the OTP version with:
+
+```bash
+$ erl -eval 'erlang:display(erlang:system_info(otp_release)), halt().'  -noshell
+"18"
+```
 
 Running the code
 =================
