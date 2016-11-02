@@ -5,7 +5,7 @@
 start() ->
     io:format("~n~n==== ERLPORT STARTED ====~n~n", []),
     help(),
-    io:format("~n~n========~n~n", []).
+    io:format("~n~n========~n~n", []),
     ok.
 
 start_link() ->
