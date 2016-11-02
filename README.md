@@ -38,7 +38,7 @@ The Task
 
 We will try to simulate a scenario where we have an airport and a bunch of planes trying to land to said airport. The airport has a control tower that accepts communication from planes. The planes are by default airborne and approaching the airport.
 
-First they will ask for permission to land. If they get a positive response, they should be allowed to commense the landing sequence, then go to the hangar as they finished up their journey. If they get a negative response back from the control tower, they stay in air and try again later.
+First they will ask for permission to land. If they get a positive response, they should be allowed to commence the landing sequence, then go to the hangar as they finished up their journey. If they get a negative response back from the control tower, they stay in air and try again later.
 
 In our case, the *control tower* is a [gen_server](http://erlang.org/doc/man/gen_server.html), listening and reacting to events. It also keeps a state data structure of itself to keep track of the landing strip. The server accepts the following messages / calls:
 
