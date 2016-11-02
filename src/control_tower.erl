@@ -147,10 +147,12 @@ handle_cast({close_landing_strip, _LS}, LandingStrip=#landing_strip{free=false})
 %% TODO
 handle_cast({make_landing, Plane, _LS, From}, LandingStrip) ->
     %% Instructions %%
+    %%
     %%  When we're making a landing, we need to do the following:
     %%  - Sleep for 3000ms as landing takes some time
     %%  - Add a log message about the fact that we landed
     %%  - Free up the landing strip
+    %%  - Message the plane that it can rest now
     %%  - Return as an asynchronus call, with the appropriate state
     %% ------------ %%
     %%
@@ -164,13 +166,13 @@ handle_cast({make_landing, Plane, _LS, From}, LandingStrip) ->
 %% Approach the runway
 handle_call({land_plane, Plane, _LS}, From, LandingStrip) ->
     %% Instructions %%
+    %%
     %%  When we're starting to land a plane, we need to do:
     %%  - The tower needs to log that a plane is approaching the runway / landing strip
     %%  - We call make_landing asynchornously within this state on the control tower
     %%  - Reply with an ok message
     %%
     %% ------------ %%
-    io:format("[TOWER] Plane ~p approaching runway ~p ~n", [Plane#plane.flight_number, LandingStrip#landing_strip.id]),
     % Mark the landing strip as occupied
     {reply, ok, LandingStrip};
     %% ------------ %%
@@ -183,10 +185,13 @@ handle_call(open_landing_strip, _From, closed) ->
 
 %% Check if the plane can land, look for free landing strips
 %% Instructions %%
+%%
 %%  Asking for permission to land
 %%  - We need to handle to cases here:
-%%   - When the landing strip is free -> permission granted, but make sure we mark the landing strip as reserved for the plane that asked for it
-%%   - If the landing strip is occupied, we need to return with a cannot_land message so the plane can retry later
+%%   - When the landing strip is free -> permission granted,
+%%      but make sure we mark the landing strip as reserved for the plane that asked for it
+%%   - If the landing strip is occupied, we need to return with
+%%      a cannot_land message so the plane can retry later
 %%
 %% ------------ %%
 handle_call({permission_to_land, Plane = #plane{}}, _From, LandingStrip) ->

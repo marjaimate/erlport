@@ -43,6 +43,7 @@ get_state(PlanePid) ->
 %%%%%% FSM %%%%%%
 init([Plane]) ->
     %% Instructions %%
+    %%
     %%  - Create our plane and set with the first state in_air
     %% ------------ %%
     %%
@@ -52,6 +53,7 @@ init([Plane]) ->
 
 in_air(permission_to_land, Plane) ->
     %% Instructions %%
+    %%
     %%  - We need to ask the control tower whether we can land or not while the plane is airborne
     %%  - if we get the go ahead -> then transition to prepare_for_landing
     %%  - if we did not get the permission -> stay in_air
@@ -71,6 +73,7 @@ in_air(Event, Data) ->
 
 prepare_for_landing(land, Plane) ->
     %% Instructions %%
+    %%
     %%  - Call the control tower to land the plane on the assigned landing strip
     %%  - Transition to state landed when finished
     %% ------------ %%
@@ -80,6 +83,7 @@ prepare_for_landing(land, Plane) ->
     %% ------------ %%
 
 %% Instructions %%
+%%
 %%  - Once the plane landed, we just allow it to terminate with a simple log message
 %% ------------ %%
 %%
